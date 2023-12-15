@@ -1,59 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/views/edit_note_view.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key,required this.color});
- final Color color;
+  const NoteItem({super.key, required this.color});
+  final Color color;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(16, 24, 0, 24),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ListTile(
-            title: const Text(
-              'Flutter tips',
-              style: TextStyle(
-                fontSize: 26,
-                color: Colors.black,
-              ),
-            ),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(
-                top: 16,
-                bottom: 16,
-              ),
-              child: Text(
-                'Mohamed Abolila Cs student',
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const EditNoteView()));
+      },
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(16, 24, 0, 24),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              title: const Text(
+                'Flutter tips',
                 style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black.withOpacity(.5),
+                  fontSize: 26,
+                  color: Colors.black,
+                ),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  bottom: 16,
+                ),
+                child: Text(
+                  'Mohamed Abolila Cs student',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black.withOpacity(.5),
+                  ),
+                ),
+              ),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.black,
                 ),
               ),
             ),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.delete,
-                color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.only(right: 24),
+              child: Text(
+                ' May 21 , 2023',
+                style: TextStyle(
+                  color: Colors.black.withOpacity(.4),
+                  fontSize: 16,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 24),
-            child: Text(
-              ' May 21 , 2023',
-              style: TextStyle(
-                color: Colors.black.withOpacity(.4),
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
