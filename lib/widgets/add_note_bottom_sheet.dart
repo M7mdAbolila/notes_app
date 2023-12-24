@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
 import 'package:notes_app/cubits/notes_cubit/note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
+import 'package:notes_app/widgets/colors_list_view.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 
 import 'custom_text_field.dart';
@@ -17,9 +18,7 @@ class AddNoteBottomSheet extends StatelessWidget {
       create: (context) => AddNoteCubit(),
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {
-          if (state is AddNoteFailure) {
-           
-          }
+          if (state is AddNoteFailure) {}
           if (state is AddNoteSuccess) {
             BlocProvider.of<NoteCubit>(context).fetchAllNotes();
             Navigator.pop(context);
@@ -84,7 +83,11 @@ class _AddNotesFormState extends State<AddNotesForm> {
             maxLines: 5,
           ),
           const SizedBox(
-            height: 64,
+            height: 24,
+          ),
+          const ColorsListView(),
+          const SizedBox(
+            height: 24,
           ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
             builder: (context, state) {
