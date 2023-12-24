@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_app/cubits/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app/cubits/notes_cubit/note_cubit.dart';
 import 'package:notes_app/models/note_model.dart';
 import 'package:notes_app/widgets/custom_button.dart';
 
@@ -17,9 +18,10 @@ class AddNoteBottomSheet extends StatelessWidget {
       child: BlocConsumer<AddNoteCubit, AddNoteState>(
         listener: (context, state) {
           if (state is AddNoteFailure) {
-            print('failed ${state.errMessage}');
+           
           }
           if (state is AddNoteSuccess) {
+            BlocProvider.of<NoteCubit>(context).fetchAllNotes();
             Navigator.pop(context);
           }
         },
@@ -93,7 +95,8 @@ class _AddNotesFormState extends State<AddNotesForm> {
                     formKey.currentState!.save();
                     var currentDate = DateTime.now();
 
-                    var formattedCurrentDate = DateFormat('dd-mm-yyy').format(currentDate);
+                    var formattedCurrentDate =
+                        DateFormat('dd-mm-yyy').format(currentDate);
 
                     var noteModel = NoteModel(
                         title: title!,
